@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow:
 
-Sitemap: https://iabce2026.github.io/IABCE/sitemap.xml
+Sitemap: https://labce2026.github.io/ABCE/sitemap.xml
