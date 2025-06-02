@@ -130,18 +130,17 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      margin-top: 175px; /* Positioned right below the buttons */
-      padding: 0 15px;
+      padding: 0;
+      margin-top: 165px; /* sits right underneath the 3 buttons */
       box-sizing: border-box;
     }
 
     .image-container-mobile img {
-      width: 100%;
+      width: 100vw; /* full screen width */
       height: auto;
       object-fit: contain;
+      display: block;
       border-radius: 0;
-      max-width: 100%;
-      max-height: none;
     }
 
     @media (max-width: 768px) {
@@ -186,7 +185,7 @@
       }
 
       .image-container-mobile {
-        margin-top: 155px;
+        margin-top: 145px; /* adjusted for smaller screens */
       }
     }
   </style>
