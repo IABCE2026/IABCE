@@ -98,24 +98,25 @@
             }
 
             .back-link {
-                top: 40px; /* Adjust vertical position */
-                left: 50%; /* Center horizontally */
-                transform: translateX(-50%); /* Center horizontally */
+                top: 40px;
+                left: 50%;
+                transform: translateX(-50%);
                 padding: 6px 15px;
                 font-size: 0.9rem;
             }
 
             .image-wrapper {
-                height: auto; /* Allow height to adjust for mobile */
+                height: auto; /* Allow height to adjust based on image content */
                 padding-top: 80px; /* Push image down below header elements */
                 padding-bottom: 20px;
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 95%; /* Make the main image slightly smaller than full width */
+                width: 100%; /* Make the main image fill almost full width */
                 height: auto; /* Maintain aspect ratio */
-                object-fit: contain; /* Ensure the entire image is visible, no cropping */
+                /* object-fit: contain; // Keeps entire image visible, but might leave empty space */
+                object-fit: cover; /* Makes image fill the area, but might crop edges */
                 display: block;
                 margin: 0 auto; /* Center image horizontally */
             }
@@ -148,7 +149,7 @@
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 98%;
+                width: 100%; /* Ensure it's full width for very small screens too */
             }
         }
 
