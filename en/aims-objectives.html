@@ -9,15 +9,17 @@
             margin: 0;
             background-color: #000;
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+            /* Prevent horizontal scroll on small screens, which can happen if elements overflow */
+            overflow-x: hidden;
         }
 
-        /* Corner images brought to front */
+        /* --- DESKTOP-SPECIFIC STYLES (Your original, kept as is for desktop) --- */
+
         .top-left,
         .top-right {
             position: absolute;
             top: 20px;
-            width: 150px; /* Fixed width for desktop, adjusted for mobile below */
+            width: 150px; /* Original desktop width */
             height: auto;
             z-index: 9999;
             pointer-events: none;
@@ -30,34 +32,25 @@
         .top-right {
             right: 20px;
         }
-
+        
         .image-wrapper {
             position: relative;
             width: 100%;
-            min-height: 100vh; /* Use min-height to ensure content fits even if taller */
+            height: 100vh; /* Original desktop height */
             overflow: hidden;
-            display: flex; /* Use flexbox to center image easily */
-            justify-content: center;
-            align-items: center;
         }
 
         .image-wrapper img {
-            max-width: 100%; /* Image won't exceed its container's width */
-            height: auto;    /* Maintain aspect ratio */
-            display: block;  /* Remove extra space below images */
-            /* object-fit: contain; */ /* Use 'contain' if you want to ensure the whole image is always visible,
-                                        or 'cover' if you want it to fill the space, potentially cropping */
-            /* Removed object-fit: fill; as it can distort the image */
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Original desktop object-fit */
+            display: block;
         }
 
         .back-link {
             position: absolute;
-            /* Adjust positioning relative to the main image */
-            top: 50px; /* Example starting point, adjust as needed */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Adjust for half its own width */
-            z-index: 10; /* Ensure it's above the image */
-
+            top: 80px;      /* Original desktop position */
+            left: 300px;    /* Original desktop position */
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
@@ -67,6 +60,7 @@
             border-radius: 6px;
             font-size: 1rem;
             transition: all 0.3s ease;
+            z-index: 10; /* Ensure it's above the image */
         }
 
         .back-link:hover {
@@ -74,58 +68,70 @@
             color: #000;
         }
 
-        /* --- Media Queries for Responsiveness --- */
+        /* --- MOBILE-SPECIFIC STYLES (Apply ONLY when screen is small) --- */
 
-        /* Styles for screens smaller than 768px (common tablet portrait / mobile landscape breakpoint) */
+        /* Media query for screens up to 768px wide (common for tablets in portrait, larger phones) */
         @media (max-width: 768px) {
             .top-left,
             .top-right {
-                width: 80px; /* Smaller corner images on smaller screens */
+                width: 100px; /* Make corner images smaller */
                 top: 10px;
+                /* Adjust left/right to ensure they stay within view and don't get cut off */
                 left: 10px;
                 right: 10px;
             }
 
-            .back-link {
-                top: 20px; /* Adjust back link position for mobile */
-                padding: 6px 15px;
-                font-size: 0.9rem;
-            }
-
             .image-wrapper {
-                min-height: auto; /* Allow wrapper to shrink on mobile */
-                padding: 20px 0; /* Add some vertical padding */
+                height: auto; /* Allow height to adjust based on content */
+                /* Add padding top/bottom to prevent content from touching edges */
+                padding-top: 50px; /* Adjust if header/back button is higher */
+                padding-bottom: 20px;
             }
 
             .image-wrapper img {
-                width: 95%; /* Adjust width to leave some padding on sides */
-                height: auto;
+                width: 95%; /* Make the main image slightly smaller than full width */
+                height: auto; /* Maintain aspect ratio */
                 object-fit: contain; /* Ensure the entire image is visible, no cropping */
+                /* Optional: Add some margin top/bottom if needed */
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .back-link {
+                /* Reposition for mobile */
+                top: 20px; /* Move it closer to the top for mobile */
+                left: 50%; /* Center horizontally */
+                transform: translateX(-50%); /* Adjust for half its own width to truly center */
+                padding: 6px 15px; /* Smaller padding */
+                font-size: 0.9rem; /* Smaller font size */
             }
         }
 
-        /* Styles for screens smaller than 480px (common mobile portrait breakpoint) */
+        /* Media query for screens up to 480px wide (common for most mobile phones in portrait) */
         @media (max-width: 480px) {
             .top-left,
             .top-right {
-                width: 60px; /* Even smaller corner images on very small screens */
+                width: 70px; /* Even smaller corner images for very small screens */
                 top: 5px;
                 left: 5px;
                 right: 5px;
             }
 
-            .back-link {
-                top: 10px; /* Further adjust back link position for very small mobile */
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-
             .image-wrapper {
-                padding: 10px 0;
+                padding-top: 40px; /* Less padding for very small screens */
+                padding-bottom: 10px;
             }
 
             .image-wrapper img {
                 width: 98%; /* Almost full width for the main image */
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .back-link {
+                top: 10px; /* Move it even closer to the top for very small screens */
+                padding: 5px 10px; /* Even smaller padding */
+                font-size: 0.8rem; /* Even smaller font size */
             }
         }
 
