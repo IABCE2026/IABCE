@@ -11,13 +11,11 @@
             background-color: #000;
             font-family: 'Poppins', sans-serif;
             color: #e11915;
-            position: relative; /* Needed for absolutely positioned elements */
-            overflow-x: hidden; /* Prevents horizontal scroll */
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- DESKTOP-SPECIFIC STYLES (NO CHANGES HERE) --- */
-
-        /* Top-centered nav for desktop */
+        /* --- DESKTOP-SPECIFIC STYLES --- */
         .nav-container-desktop {
             width: 100%;
             text-align: center;
@@ -34,15 +32,14 @@
             font-size: 1.2em;
         }
 
-        /* Corner images for desktop */
         .top-left-desktop,
         .top-right-desktop {
             position: absolute;
             top: 20px;
             width: 150px;
             height: auto;
-            z-index: 9999; /* highest priority */
-            pointer-events: none; /* ensures clicks go through */
+            z-index: 9999;
+            pointer-events: none;
         }
 
         .top-left-desktop {
@@ -53,17 +50,15 @@
             right: 20px;
         }
 
-        /* Main image container for desktop */
         .image-container-desktop {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            padding-top: 100px; /* Space for desktop header */
+            padding-top: 100px;
             box-sizing: border-box;
         }
 
-        /* Desktop specific image styling */
         .image-container-desktop img {
             width: 1920px;
             height: 1080px;
@@ -74,44 +69,54 @@
             display: block;
         }
 
-        /* --- MOBILE-SPECIFIC ELEMENTS (HIDDEN ON DESKTOP) --- */
+        /* --- MOBILE STYLES --- */
         .header-mobile,
         .image-container-mobile {
-            display: none; /* Hide all mobile elements by default */
+            display: none;
         }
 
-        /* Mobile specific corner images */
         .top-left-mobile,
         .top-right-mobile {
-            position: absolute; /* Keep absolute for precise positioning */
+            position: absolute;
             height: auto;
             z-index: 9999;
             pointer-events: none;
-            box-sizing: border-box; /* Ensure padding/borders don't push it in */
+            box-sizing: border-box;
         }
 
-        /* Mobile specific navigation buttons wrapper */
+        .top-left-mobile {
+            width: 90px;
+            top: 15px;
+            left: 15px;
+        }
+
+        .top-right-mobile {
+            width: 90px;
+            top: 15px;
+            right: 15px;
+        }
+
         .mobile-nav-wrapper {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: row;
-            gap: 10px; /* Reduced gap between buttons for smaller size */
+            gap: 10px;
             z-index: 100;
-            white-space: nowrap; /* Prevent links from wrapping */
+            white-space: nowrap;
+            top: 130px;
         }
 
-        /* Mobile specific navigation link styling */
         .mobile-nav-wrapper .nav-link-mobile {
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
             font-weight: 600;
-            padding: 4px 10px; /* Smaller padding for smaller buttons */
+            padding: 4px 10px;
             border: 1px solid #e11915;
             border-radius: 6px;
-            font-size: 0.75rem; /* Smaller font size */
+            font-size: 0.75rem;
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -120,15 +125,37 @@
             color: #000;
         }
 
-        /* --- MEDIA QUERIES FOR MOBILE DEVICES --- */
+        .image-container-mobile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            min-height: 100vh;
+            padding-top: 180px;
+            box-sizing: border-box;
+        }
 
-        /* Styles for screens up to 768px wide (Tablets in portrait, larger phones) */
+        .image-container-mobile picture {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .image-container-mobile picture img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0;
+            max-width: 100%;
+            max-height: none;
+        }
+
         @media (max-width: 768px) {
             body, html {
-                overflow-y: auto; /* Allow vertical scroll on mobile */
+                overflow-y: auto;
             }
 
-            /* Hide all desktop elements */
             .nav-container-desktop,
             .top-left-desktop,
             .top-right-desktop,
@@ -136,118 +163,64 @@
                 display: none;
             }
 
-            /* Show mobile header and main image container */
             .header-mobile,
             .image-container-mobile {
-                display: block; /* Show header-mobile as a block */
-            }
-
-            .header-mobile {
-                position: absolute; /* Position relative to body */
-                top: 0;
-                left: 0;
-                width: 100%;
-                /* Increased height to accommodate logos and buttons *much* further down */
-                height: 180px; /* Adjusted height */
-                z-index: 10; /* Ensure it's on top */
-            }
-
-            .top-left-mobile {
-                width: 90px;
-                top: 15px;
-                left: 15px;
-            }
-
-            .top-right-mobile {
-                width: 90px;
-                top: 15px;
-                /* Crucial change: Set right to 0px to push it to the absolute edge */
-                right: 100px; /* Adjusted right value to ensure it's on the edge */
-            }
-
-            .mobile-nav-wrapper {
-                /* Pushed even further down */
-                top: 130px; /* Adjusted top to make buttons much lower */
-            }
-
-            /* Main image container for mobile */
-            .image-container-mobile {
-                display: flex; /* Use flex for centering */
-                justify-content: center;
-                align-items: center;
-                height: auto; /* Allow height to adjust based on image content */
-                min-height: 100vh; /* Ensure it covers full viewport height */
-                /* Padding top adjusted to match new header-mobile height */
-                padding-top: 180px; /* Adjusted padding to match new header height */
-                box-sizing: border-box; /* Include padding in height */
-            }
-            
-            /* Mobile specific image styling */
-            .image-container-mobile picture {
-                display: block; /* Show picture element on mobile */
-                width: 100%;
-                height: auto; /* Allow height to adjust */
-                margin: 0 auto; /* Center horizontally */
-            }
-
-            .image-container-mobile picture img {
-                width: 100%; /* Fill width */
-                height: auto; /* Maintain aspect ratio */
-                object-fit: contain; /* Keep entire image visible, allowing it to dictate height */
-                border-radius: 0; /* Remove border-radius for mobile if not desired */
-                max-width: 100%; /* Ensure it doesn't exceed 100% width */
-                max-height: none; /* Remove desktop max-height constraint */
+                display: block;
             }
         }
 
-        /* Styles for screens up to 480px wide (Smaller phones) */
         @media (max-width: 480px) {
             .header-mobile {
-                height: 150px; /* Adjusted height for smaller header */
+                height: 150px;
             }
 
-            .top-left-mobile,
-            .top-right-mobile {
-                width: 60px; /* Smaller logo size */
+            .top-left-mobile {
+                width: 60px;
                 top: 10px;
                 left: 10px;
-                /* Crucial change: Set right to 0px for smaller screens too */
-                right: 0px; /* Adjusted right value to ensure it's on the edge */
+            }
+
+            .top-right-mobile {
+                width: 60px;
+                top: 10px;
+                right: 10px;
             }
 
             .mobile-nav-wrapper {
-                top: 105px; /* Adjusted further down for smaller screens */
-                gap: 8px; /* Even smaller gap */
+                top: 105px;
+                gap: 8px;
             }
 
             .mobile-nav-wrapper .nav-link-mobile {
-                padding: 3px 8px; /* Even smaller padding */
-                font-size: 0.7rem; /* Even smaller font size */
+                padding: 3px 8px;
+                font-size: 0.7rem;
             }
 
             .image-container-mobile {
-                padding-top: 150px; /* Adjusted padding for smaller header */
+                padding-top: 150px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Desktop Logos -->
     <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left-desktop">
-
     <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right-desktop">
 
+    <!-- Desktop Nav -->
     <div class="nav-container-desktop">
         <a class="nav-link-desktop" href="../index.html">BACK</a>
         <a class="nav-link-desktop" href="aims-objectives.html">AIMS & OBJECTIVES</a>
         <a class="nav-link-desktop" href="scan-qr.html">SCAN QR CODE</a>
     </div>
 
+    <!-- Desktop Image -->
     <div class="image-container-desktop">
         <img src="1a.png" alt="IABCE 2026 Introduction">
     </div>
 
-
+    <!-- Mobile Header with Logos & Nav -->
     <div class="header-mobile">
         <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left-mobile">
         <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right-mobile">
@@ -258,9 +231,12 @@
         </div>
     </div>
 
+    <!-- Mobile Image -->
     <div class="image-container-mobile">
         <picture>
-            <source media="(max-width: 768px)" srcset="1amb.png"> <img src="1a.png" alt="IABCE 2026 Introduction"> </picture>
+            <source media="(max-width: 768px)" srcset="1amb.png">
+            <img src="1a.png" alt="IABCE 2026 Introduction">
+        </picture>
     </div>
 
 </body>
