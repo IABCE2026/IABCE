@@ -11,6 +11,9 @@
             background-color: #000;
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden; /* Prevents horizontal scroll */
+            display: flex;
+            flex-direction: column; /* Allows main-content to push footer down if needed */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
         }
 
         /* Common Styles for Top Logos */
@@ -24,7 +27,7 @@
 
         /* Back Link Common Styles */
         .back-link {
-            position: absolute; /* Positioned relative to the nearest positioned ancestor (body or image-wrapper) */
+            position: absolute; /* Positioned relative to the nearest positioned ancestor (body or main-content) */
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
@@ -42,25 +45,27 @@
             color: #000;
         }
 
-        /* Image Wrapper */
-        .image-wrapper {
+        /* Main Content Wrapper */
+        .main-content {
             position: relative; /* Crucial for absolute positioning of back-link */
+            flex-grow: 1; /* Allows this div to take up available vertical space */
             width: 100%;
-            min-height: 100vh; /* Ensure it covers at least the viewport height */
-            display: flex; /* Use flexbox to center content */
+            display: flex;
             justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically (if content is smaller than wrapper) */
-            overflow: hidden; /* Hide any overflow from the image */
+            align-items: center; /* Center vertically */
+            padding-top: 100px; /* Space for absolute positioned logos and back button */
+            padding-bottom: 20px; /* A little space at the bottom */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
 
-        /* Picture and Image within image-wrapper */
-        .image-wrapper picture,
-        .image-wrapper img {
-            width: 100%; /* Image will fill the width of its parent */
-            height: 100%; /* Image will fill the height of its parent */
+        /* Picture and Image within main-content */
+        .main-content picture,
+        .main-content img {
+            max-width: 100%; /* Image will not exceed the width of its parent */
+            max-height: 100%; /* Image will not exceed the height of its parent */
             display: block; /* Remove extra space below image */
-            object-fit: fill; /* Stretch to fill the container, WILL distort if aspect ratio differs */
-            margin: 0; /* Remove any default margins */
+            object-fit: contain; /* IMPORTANT: Maintain aspect ratio, fully visible */
+            margin: auto; /* Center the image within the flex container */
         }
 
         /* --- DESKTOP-SPECIFIC STYLES (Default / Base) --- */
@@ -81,11 +86,6 @@
             left: 300px; /* Fixed position for desktop */
         }
 
-        /*
-           The image-wrapper's min-height and img's height: 100% combined with object-fit: fill
-           will ensure the image fills the viewport height on desktop.
-        */
-
 
         /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
 
@@ -103,6 +103,10 @@
             .top-right {
                 width: 130px; /* Slightly smaller logos */
                 top: 18px;
+            }
+
+            .main-content {
+                padding-top: 120px; /* More space for adjusted header elements */
             }
         }
 
@@ -127,21 +131,16 @@
                 font-size: 0.9rem;
             }
             
-            .image-wrapper {
-                min-height: calc(100vh - 100px); /* Adjust min-height to account for header elements */
-                /* The padding-top was causing issues, better to manage the image height directly or adjust its content */
-                padding-top: 0; /* No padding on wrapper itself */
-                align-items: flex-start; /* Align image to the top of the wrapper */
+            .main-content {
+                /* On mobile, we might want the image to start closer to the top after the header */
+                justify-content: flex-start; /* Align image to the top of the flex container */
+                padding-top: 100px; /* Ensure space for header elements on mobile */
+                padding-bottom: 10px; /* Less padding on mobile */
             }
 
-            /* Image will take 100% width of its parent */
-            .image-wrapper picture,
-            .image-wrapper img {
-                width: 100%;
-                height: auto; /* Allow height to adjust to maintain aspect ratio IF using object-fit: contain/cover */
-                /* For object-fit: fill, height: 100% is still needed to stretch it within its wrapper */
-                /* If your mobile image (2amb.png) has a very different aspect ratio, object-fit: fill will look bad */
-                object-fit: fill; /* Remains fill as per your request */
+            .main-content picture,
+            .main-content img {
+                /* No specific height needed here, max-height and object-fit: contain will handle it */
             }
         }
 
@@ -165,8 +164,8 @@
                 font-size: 0.8rem;
             }
 
-            .image-wrapper {
-                min-height: calc(100vh - 80px); /* Further adjust min-height */
+            .main-content {
+                padding-top: 80px; /* Further adjust padding for very small screens */
             }
         }
 
@@ -177,7 +176,7 @@
     <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
     <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
 
-    <div class="image-wrapper">
+    <div class="main-content">
         <a href="information.html" class="back-link">BACK</a>
         
         <picture>
