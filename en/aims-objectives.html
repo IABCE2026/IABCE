@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Aims & Objectives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aims & Objectives</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             background-color: #000;
             font-family: 'Poppins', sans-serif;
-            /* Prevent horizontal scroll on small screens, which can happen if elements overflow */
             overflow-x: hidden;
         }
 
@@ -76,34 +76,39 @@
             .top-right {
                 width: 100px; /* Make corner images smaller */
                 top: 10px;
-                /* Adjust left/right to ensure they stay within view and don't get cut off */
-                left: 10px;
-                right: 10px;
             }
 
+            .top-left { /* Specific rule for top-left on mobile */
+                left: 10px;
+                right: auto; /* Ensure it doesn't try to occupy right space */
+            }
+
+            .top-right { /* Specific rule for top-right on mobile */
+                right: 10px;
+                left: auto; /* Ensure it doesn't try to occupy left space */
+            }
+
+
             .image-wrapper {
-                height: auto; /* Allow height to adjust based on content */
-                /* Add padding top/bottom to prevent content from touching edges */
-                padding-top: 50px; /* Adjust if header/back button is higher */
+                height: auto;
+                padding-top: 50px;
                 padding-bottom: 20px;
             }
 
             .image-wrapper img {
-                width: 95%; /* Make the main image slightly smaller than full width */
-                height: auto; /* Maintain aspect ratio */
-                object-fit: contain; /* Ensure the entire image is visible, no cropping */
-                /* Optional: Add some margin top/bottom if needed */
+                width: 95%;
+                height: auto;
+                object-fit: contain;
                 margin-top: 20px;
                 margin-bottom: 20px;
             }
 
             .back-link {
-                /* Reposition for mobile */
-                top: 20px; /* Move it closer to the top for mobile */
-                left: 50%; /* Center horizontally */
-                transform: translateX(-50%); /* Adjust for half its own width to truly center */
-                padding: 6px 15px; /* Smaller padding */
-                font-size: 0.9rem; /* Smaller font size */
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 6px 15px;
+                font-size: 0.9rem;
             }
         }
 
@@ -111,27 +116,33 @@
         @media (max-width: 480px) {
             .top-left,
             .top-right {
-                width: 70px; /* Even smaller corner images for very small screens */
+                width: 70px;
                 top: 5px;
+            }
+
+            .top-left { /* Specific rule for top-left on very small mobile */
                 left: 5px;
+            }
+
+            .top-right { /* Specific rule for top-right on very small mobile */
                 right: 5px;
             }
 
             .image-wrapper {
-                padding-top: 40px; /* Less padding for very small screens */
+                padding-top: 40px;
                 padding-bottom: 10px;
             }
 
             .image-wrapper img {
-                width: 98%; /* Almost full width for the main image */
+                width: 98%;
                 margin-top: 10px;
                 margin-bottom: 10px;
             }
 
             .back-link {
-                top: 10px; /* Move it even closer to the top for very small screens */
-                padding: 5px 10px; /* Even smaller padding */
-                font-size: 0.8rem; /* Even smaller font size */
+                top: 10px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
             }
         }
 
