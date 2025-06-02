@@ -10,7 +10,7 @@
             margin: 0;
             background-color: #000;
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevents horizontal scroll */
         }
 
         /* --- DESKTOP-SPECIFIC STYLES (Your original, kept as is for desktop) --- */
@@ -34,7 +34,7 @@
         }
         
         .image-wrapper {
-            position: relative;
+            position: relative; /* Keep this for back-link positioning */
             width: 100%;
             height: 100vh; /* Original desktop height */
             overflow: hidden;
@@ -60,7 +60,7 @@
             border-radius: 6px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            z-index: 10; /* Ensure it's above the image */
+            z-index: 10;
         }
 
         .back-link:hover {
@@ -70,79 +70,73 @@
 
         /* --- MOBILE-SPECIFIC STYLES (Apply ONLY when screen is small) --- */
 
-        /* Media query for screens up to 768px wide (common for tablets in portrait, larger phones) */
+        /* Media query for screens up to 768px wide */
         @media (max-width: 768px) {
-            .top-left,
+            .top-left {
+                width: 100px; /* Make corner images smaller */
+                top: 15px; /* Slightly lower from top */
+                left: 15px; /* Some padding from left */
+                right: auto; /* Ensure it stays left */
+            }
+
             .top-right {
                 width: 100px; /* Make corner images smaller */
-                top: 10px;
+                top: 15px; /* Slightly lower from top */
+                right: 15px; /* Some padding from right */
+                left: auto; /* Ensure it stays right */
             }
 
-            .top-left { /* Specific rule for top-left on mobile */
-                left: 10px;
-                right: auto; /* Ensure it doesn't try to occupy right space */
+            .back-link {
+                top: 40px; /* Adjust vertical position for mobile to be between logos */
+                left: 50%; /* Center horizontally */
+                transform: translateX(-50%); /* Center horizontally */
+                padding: 6px 15px;
+                font-size: 0.9rem;
             }
-
-            .top-right { /* Specific rule for top-right on mobile */
-                right: 10px;
-                left: auto; /* Ensure it doesn't try to occupy left space */
-            }
-
 
             .image-wrapper {
-                height: auto;
-                padding-top: 50px;
+                height: auto; /* Allow height to adjust for mobile */
+                /* Adjust padding to control overall height and spacing */
+                padding-top: 80px; /* Adjust this to push image down below the header elements */
                 padding-bottom: 20px;
             }
 
             .image-wrapper img {
-                width: 95%;
-                height: auto;
-                object-fit: contain;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-
-            .back-link {
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                padding: 6px 15px;
-                font-size: 0.9rem;
+                width: 95%; /* Make the main image slightly smaller than full width */
+                height: auto; /* Maintain aspect ratio */
+                object-fit: contain; /* Ensure the entire image is visible, no cropping */
+                display: block; /* Ensure it behaves correctly */
+                margin: 0 auto; /* Center image horizontally */
             }
         }
 
         /* Media query for screens up to 480px wide (common for most mobile phones in portrait) */
         @media (max-width: 480px) {
-            .top-left,
+            .top-left {
+                width: 70px; /* Even smaller */
+                top: 10px;
+                left: 10px;
+            }
+
             .top-right {
-                width: 70px;
-                top: 5px;
+                width: 70px; /* Even smaller */
+                top: 10px;
+                right: 10px;
             }
 
-            .top-left { /* Specific rule for top-left on very small mobile */
-                left: 5px;
-            }
-
-            .top-right { /* Specific rule for top-right on very small mobile */
-                right: 5px;
+            .back-link {
+                top: 30px; /* Adjust vertical position */
+                padding: 5px 10px;
+                font-size: 0.8rem;
             }
 
             .image-wrapper {
-                padding-top: 40px;
+                padding-top: 60px; /* Adjust this to push image down */
                 padding-bottom: 10px;
             }
 
             .image-wrapper img {
-                width: 98%;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-
-            .back-link {
-                top: 10px;
-                padding: 5px 10px;
-                font-size: 0.8rem;
+                width: 98%; /* Almost full width for the main image */
             }
         }
 
