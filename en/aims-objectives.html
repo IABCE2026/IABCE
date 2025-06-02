@@ -84,40 +84,39 @@
         /* Media query for screens up to 768px wide */
         @media (max-width: 768px) {
             .top-left {
-                width: 100px;
+                width: 120px; /* Increased from 100px */
                 top: 15px;
                 left: 15px;
                 right: auto;
             }
 
             .top-right {
-                width: 100px;
+                width: 120px; /* Increased from 100px */
                 top: 15px;
                 right: 15px;
                 left: auto;
             }
 
             .back-link {
-                top: 40px;
+                top: 40px; /* Vertical position unchanged */
                 left: 50%;
                 transform: translateX(-50%);
-                padding: 6px 15px;
-                font-size: 0.9rem;
+                padding: 6px 15px; /* Back button size unchanged */
+                font-size: 0.9rem; /* Back button font size unchanged */
             }
 
             .image-wrapper {
-                height: auto; /* Allow height to adjust based on image content */
-                min-height: calc(100vh - 60px); /* Ensure it's at least viewport height minus header offset */
-                                                /* Adjust 60px based on actual header height */
-                padding-top: 80px; /* Push image down below header elements */
-                /* Removed padding-bottom: 20px; to allow it to extend fully */
+                height: auto;
+                min-height: calc(100vh - 60px); /* Adjust 60px as needed */
+                padding-top: 90px; /* Slightly increased padding-top to give more space from top elements */
+                /* padding-bottom removed to allow full height */
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 100%; /* Ensure the main image fills the width */
+                width: 100%; /* Full width for main image */
                 height: auto; /* Maintain aspect ratio */
-                object-fit: contain; /* Keep the entire image visible, allowing it to dictate height */
+                object-fit: contain; /* Keep entire image visible without cropping */
                 display: block;
                 margin: 0 auto; /* Center image horizontally */
             }
@@ -126,27 +125,27 @@
         /* Media query for screens up to 480px wide */
         @media (max-width: 480px) {
             .top-left {
-                width: 70px;
+                width: 90px; /* Increased from 70px */
                 top: 10px;
                 left: 10px;
             }
 
             .top-right {
-                width: 70px;
+                width: 90px; /* Increased from 70px */
                 top: 10px;
                 right: 10px;
             }
 
             .back-link {
-                top: 30px;
-                padding: 5px 10px;
-                font-size: 0.8rem;
+                top: 30px; /* Vertical position unchanged */
+                padding: 5px 10px; /* Back button size unchanged */
+                font-size: 0.8rem; /* Back button font size unchanged */
             }
 
             .image-wrapper {
-                min-height: calc(100vh - 50px); /* Adjust 50px based on actual header height */
-                padding-top: 60px;
-                /* Removed padding-bottom: 10px; */
+                min-height: calc(100vh - 50px); /* Adjust 50px as needed */
+                padding-top: 70px; /* Slightly increased padding-top */
+                /* padding-bottom removed */
             }
 
             .image-wrapper picture,
