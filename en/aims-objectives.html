@@ -107,16 +107,17 @@
 
             .image-wrapper {
                 height: auto; /* Allow height to adjust based on image content */
+                min-height: calc(100vh - 60px); /* Ensure it's at least viewport height minus header offset */
+                                                /* Adjust 60px based on actual header height */
                 padding-top: 80px; /* Push image down below header elements */
-                padding-bottom: 20px;
+                /* Removed padding-bottom: 20px; to allow it to extend fully */
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 100%; /* Make the main image fill almost full width */
+                width: 100%; /* Ensure the main image fills the width */
                 height: auto; /* Maintain aspect ratio */
-                /* object-fit: contain; // Keeps entire image visible, but might leave empty space */
-                object-fit: cover; /* Makes image fill the area, but might crop edges */
+                object-fit: contain; /* Keep the entire image visible, allowing it to dictate height */
                 display: block;
                 margin: 0 auto; /* Center image horizontally */
             }
@@ -143,13 +144,14 @@
             }
 
             .image-wrapper {
+                min-height: calc(100vh - 50px); /* Adjust 50px based on actual header height */
                 padding-top: 60px;
-                padding-bottom: 10px;
+                /* Removed padding-bottom: 10px; */
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 100%; /* Ensure it's full width for very small screens too */
+                width: 100%; /* Full width for very small screens too */
             }
         }
 
