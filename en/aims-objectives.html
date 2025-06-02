@@ -11,53 +11,40 @@
             background-color: #000;
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden; /* Prevents horizontal scroll */
+            color: #fff; /* Assuming default text color will be white */
         }
 
-        /* --- DESKTOP-SPECIFIC STYLES --- */
+        .container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh; /* Minimum height to ensure it covers viewport */
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: flex-start; /* Align items to the top initially */
+            padding-top: 80px; /* Space for top logos and back button on desktop */
+            box-sizing: border-box; /* Include padding in height */
+        }
 
-        .top-left,
-        .top-right {
+        /* Logos */
+        .logo {
             position: absolute;
-            top: 20px;
-            width: 150px;
-            height: auto;
-            z-index: 9999;
-            pointer-events: none;
+            z-index: 10;
         }
 
         .top-left {
+            top: 20px;
             left: 20px;
+            width: 150px;
         }
 
         .top-right {
+            top: 20px;
             right: 20px;
-        }
-        
-        .image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100vh; /* Desktop height */
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 150px;
         }
 
-        .image-wrapper picture {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill; /* Desktop image will fill its space */
-            display: block;
-        }
-
+        /* Back Link */
         .back-link {
             position: absolute;
             top: 80px;
@@ -79,98 +66,107 @@
             color: #000;
         }
 
-        /* --- MOBILE-SPECIFIC STYLES --- */
+        /* Main Content - Image based Aims & Objectives */
+        .aims-objectives-image {
+            width: 100%; /* Take full width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+            max-width: 1000px; /* Limit max width for desktop for better readability */
+            margin: auto; /* Center the image */
+            object-fit: contain; /* Ensure the whole image is visible and maintains aspect ratio */
+            flex-grow: 1; /* Allow image to grow and take available space */
+            padding-bottom: 20px; /* Space at the bottom */
+        }
 
-        /* Media query for screens up to 768px wide */
-        @media (max-width: 768px) {
-            .top-left {
-                width: 120px;
-                top: 15px;
-                left: 15px;
-                right: auto;
+        /* Responsive Media Queries */
+        @media (max-width: 1024px) {
+            .back-link {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 50px; /* Adjust top for smaller screens */
             }
 
+            .container {
+                padding-top: 120px; /* More space for top elements */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-left,
             .top-right {
                 width: 120px;
                 top: 15px;
+            }
+
+            .top-left {
+                left: 15px;
+            }
+            .top-right {
                 right: 15px;
-                left: auto;
             }
 
             .back-link {
-                top: 40px;
-                left: 50%;
-                transform: translateX(-50%);
+                top: 70px; /* Adjust further for mobile */
                 padding: 6px 15px;
                 font-size: 0.9rem;
             }
 
-            .image-wrapper {
-                height: auto; /* Allow height to adjust */
-                min-height: 100vh; /* Make wrapper at least full viewport height */
-                padding-top: 90px; /* Space for header elements */
-                padding-bottom: 0; /* Remove any bottom padding */
-                box-sizing: border-box; /* Include padding in height calculation */
+            .container {
+                padding-top: 100px; /* Adjust padding for smaller mobile screens */
+                justify-content: flex-start; /* Align content to start to ensure it doesn't get pushed too low */
             }
-
-            .image-wrapper picture,
-            .image-wrapper img {
-                width: 100%; /* Fill width */
-                height: 100%; /* Make image fill the image-wrapper's height */
-                object-fit: fill; /* Stretch to fill, will distort if aspect ratio is off */
-                /* object-fit: contain; /* Alternative: keeps aspect ratio, might leave black bars if container is taller */
-                display: block;
-                margin: 0; /* Remove auto margin to ensure it adheres to 100% width/height */
+            
+            .aims-objectives-image {
+                width: 100%; /* Ensure it takes full width */
+                max-width: none; /* Remove max-width on smaller screens */
+                object-fit: contain; /* Keep contain for mobile as well */
+                padding-bottom: 10px; /* Less padding on mobile */
             }
         }
 
-        /* Media query for screens up to 480px wide */
         @media (max-width: 480px) {
-            .top-left {
-                width: 90px;
-                top: 10px;
-                left: 10px;
-            }
-
+            .top-left,
             .top-right {
                 width: 90px;
                 top: 10px;
+            }
+
+            .top-left {
+                left: 10px;
+            }
+            .top-right {
                 right: 10px;
             }
 
             .back-link {
-                top: 30px;
+                top: 50px;
                 padding: 5px 10px;
                 font-size: 0.8rem;
             }
 
-            .image-wrapper {
-                min-height: 100vh; /* Ensure it's at least full viewport height */
-                padding-top: 70px;
-                padding-bottom: 0; /* Remove any bottom padding */
+            .container {
+                padding-top: 80px; /* Adjust padding for very small screens */
             }
 
-            .image-wrapper picture,
-            .image-wrapper img {
-                width: 100%;
-                height: 100%; /* Image fills its wrapper */
-                object-fit: fill; /* Stretch to fill */
-                /* object-fit: contain; */
+            .aims-objectives-image {
+                object-fit: contain; /* Still contain for very small screens */
             }
         }
-
     </style>
 </head>
 <body>
 
-    <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
-    <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
+    <img src="InfoPageImg4.png" alt="Top Left Icon" class="logo top-left">
+    <img src="InfoPageImg3.png" alt="Top Right Icon" class="logo top-right">
 
-    <div class="image-wrapper">
+    <div class="container">
         <a href="information.html" class="back-link">BACK</a>
         
-        <picture>
-            <source media="(max-width: 768px)" srcset="2amb.png"> <img src="2a.png" alt="Aims and Objectives"> </picture>
+        <img class="aims-objectives-image" 
+             srcset="2amb.png 768w, 2a.png 1200w" 
+             sizes="(max-width: 768px) 100vw, 100vw"
+             src="2a.png" 
+             alt="Aims and Objectives">
     </div>
 
 </body>
