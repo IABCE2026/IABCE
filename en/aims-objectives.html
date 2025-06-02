@@ -11,44 +11,20 @@
             background-color: #000;
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden; /* Prevents horizontal scroll */
-            color: #fff; /* Assuming default text color will be white */
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-            min-height: 100vh; /* Minimum height to ensure it covers viewport */
-            display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            justify-content: flex-start; /* Align items to the top initially */
-            padding-top: 80px; /* Space for top logos and back button on desktop */
-            box-sizing: border-box; /* Include padding in height */
-        }
-
-        /* Logos */
-        .logo {
-            position: absolute;
-            z-index: 10;
-        }
-
-        .top-left {
-            top: 20px;
-            left: 20px;
-            width: 150px;
-        }
-
+        /* Common Styles for Top Logos */
+        .top-left,
         .top-right {
-            top: 20px;
-            right: 20px;
-            width: 150px;
+            position: absolute;
+            height: auto; /* Maintain aspect ratio */
+            z-index: 9999;
+            pointer-events: none; /* Allows clicks to pass through */
         }
 
-        /* Back Link */
+        /* Back Link Common Styles */
         .back-link {
-            position: absolute;
-            top: 80px;
-            left: 300px;
+            position: absolute; /* Positioned relative to the nearest positioned ancestor (body or image-wrapper) */
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
@@ -66,107 +42,148 @@
             color: #000;
         }
 
-        /* Main Content - Image based Aims & Objectives */
-        .aims-objectives-image {
-            width: 100%; /* Take full width */
-            height: auto; /* Maintain aspect ratio */
-            display: block; /* Remove extra space below image */
-            max-width: 1000px; /* Limit max width for desktop for better readability */
-            margin: auto; /* Center the image */
-            object-fit: contain; /* Ensure the whole image is visible and maintains aspect ratio */
-            flex-grow: 1; /* Allow image to grow and take available space */
-            padding-bottom: 20px; /* Space at the bottom */
+        /* Image Wrapper */
+        .image-wrapper {
+            position: relative; /* Crucial for absolute positioning of back-link */
+            width: 100%;
+            min-height: 100vh; /* Ensure it covers at least the viewport height */
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically (if content is smaller than wrapper) */
+            overflow: hidden; /* Hide any overflow from the image */
         }
 
-        /* Responsive Media Queries */
+        /* Picture and Image within image-wrapper */
+        .image-wrapper picture,
+        .image-wrapper img {
+            width: 100%; /* Image will fill the width of its parent */
+            height: 100%; /* Image will fill the height of its parent */
+            display: block; /* Remove extra space below image */
+            object-fit: fill; /* Stretch to fill the container, WILL distort if aspect ratio differs */
+            margin: 0; /* Remove any default margins */
+        }
+
+        /* --- DESKTOP-SPECIFIC STYLES (Default / Base) --- */
+        .top-left {
+            top: 20px;
+            left: 20px;
+            width: 150px;
+        }
+
+        .top-right {
+            top: 20px;
+            right: 20px;
+            width: 150px;
+        }
+
+        .back-link {
+            top: 80px;
+            left: 300px; /* Fixed position for desktop */
+        }
+
+        /*
+           The image-wrapper's min-height and img's height: 100% combined with object-fit: fill
+           will ensure the image fills the viewport height on desktop.
+        */
+
+
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+
+        /* Tablets and larger phones (up to 1024px) */
         @media (max-width: 1024px) {
             .back-link {
-                left: 50%;
-                transform: translateX(-50%);
-                top: 50px; /* Adjust top for smaller screens */
+                left: 50%; /* Center horizontally */
+                transform: translateX(-50%); /* Adjust for true centering */
+                top: 60px; /* Adjust top position for smaller screens */
+                padding: 7px 18px; /* Slightly smaller padding */
+                font-size: 0.95rem; /* Slightly smaller font size */
             }
 
-            .container {
-                padding-top: 120px; /* More space for top elements */
+            .top-left,
+            .top-right {
+                width: 130px; /* Slightly smaller logos */
+                top: 18px;
             }
         }
 
+
+        /* Mobile devices (max-width 768px - includes typical tablets in portrait) */
         @media (max-width: 768px) {
-            .top-left,
+            .top-left {
+                width: 120px;
+                top: 15px;
+                left: 15px;
+            }
+
             .top-right {
                 width: 120px;
                 top: 15px;
-            }
-
-            .top-left {
-                left: 15px;
-            }
-            .top-right {
                 right: 15px;
             }
 
             .back-link {
-                top: 70px; /* Adjust further for mobile */
+                top: 80px; /* Position below top logos and adjust for mobile image height */
                 padding: 6px 15px;
                 font-size: 0.9rem;
             }
-
-            .container {
-                padding-top: 100px; /* Adjust padding for smaller mobile screens */
-                justify-content: flex-start; /* Align content to start to ensure it doesn't get pushed too low */
-            }
             
-            .aims-objectives-image {
-                width: 100%; /* Ensure it takes full width */
-                max-width: none; /* Remove max-width on smaller screens */
-                object-fit: contain; /* Keep contain for mobile as well */
-                padding-bottom: 10px; /* Less padding on mobile */
+            .image-wrapper {
+                min-height: calc(100vh - 100px); /* Adjust min-height to account for header elements */
+                /* The padding-top was causing issues, better to manage the image height directly or adjust its content */
+                padding-top: 0; /* No padding on wrapper itself */
+                align-items: flex-start; /* Align image to the top of the wrapper */
+            }
+
+            /* Image will take 100% width of its parent */
+            .image-wrapper picture,
+            .image-wrapper img {
+                width: 100%;
+                height: auto; /* Allow height to adjust to maintain aspect ratio IF using object-fit: contain/cover */
+                /* For object-fit: fill, height: 100% is still needed to stretch it within its wrapper */
+                /* If your mobile image (2amb.png) has a very different aspect ratio, object-fit: fill will look bad */
+                object-fit: fill; /* Remains fill as per your request */
             }
         }
 
+        /* Smaller mobile devices (max-width 480px) */
         @media (max-width: 480px) {
-            .top-left,
+            .top-left {
+                width: 90px;
+                top: 10px;
+                left: 10px;
+            }
+
             .top-right {
                 width: 90px;
                 top: 10px;
-            }
-
-            .top-left {
-                left: 10px;
-            }
-            .top-right {
                 right: 10px;
             }
 
             .back-link {
-                top: 50px;
+                top: 60px; /* Even higher for smaller phones */
                 padding: 5px 10px;
                 font-size: 0.8rem;
             }
 
-            .container {
-                padding-top: 80px; /* Adjust padding for very small screens */
-            }
-
-            .aims-objectives-image {
-                object-fit: contain; /* Still contain for very small screens */
+            .image-wrapper {
+                min-height: calc(100vh - 80px); /* Further adjust min-height */
             }
         }
+
     </style>
 </head>
 <body>
 
-    <img src="InfoPageImg4.png" alt="Top Left Icon" class="logo top-left">
-    <img src="InfoPageImg3.png" alt="Top Right Icon" class="logo top-right">
+    <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
+    <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
 
-    <div class="container">
+    <div class="image-wrapper">
         <a href="information.html" class="back-link">BACK</a>
         
-        <img class="aims-objectives-image" 
-             srcset="2amb.png 768w, 2a.png 1200w" 
-             sizes="(max-width: 768px) 100vw, 100vw"
-             src="2a.png" 
-             alt="Aims and Objectives">
+        <picture>
+            <source media="(max-width: 768px)" srcset="2amb.png">
+            <img src="2a.png" alt="Aims and Objectives">
+        </picture>
     </div>
 
 </body>
