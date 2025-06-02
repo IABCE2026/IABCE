@@ -130,13 +130,9 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      margin-top: 175px; /* Align image just below the buttons and logos */
+      margin-top: 175px; /* Positioned right below the buttons */
       padding: 0 15px;
       box-sizing: border-box;
-    }
-
-    .image-container-mobile picture {
-      width: 100%;
     }
 
     .image-container-mobile img {
@@ -146,6 +142,22 @@
       border-radius: 0;
       max-width: 100%;
       max-height: none;
+    }
+
+    @media (max-width: 768px) {
+      /* Hide desktop */
+      .nav-container-desktop,
+      .top-left-desktop,
+      .top-right-desktop,
+      .image-container-desktop {
+        display: none;
+      }
+
+      /* Show mobile */
+      .header-mobile,
+      .image-container-mobile {
+        display: block;
+      }
     }
 
     @media (max-width: 480px) {
@@ -174,7 +186,7 @@
       }
 
       .image-container-mobile {
-        margin-top: 155px; /* slightly smaller gap for small screens */
+        margin-top: 155px;
       }
     }
   </style>
@@ -207,10 +219,7 @@
   </div>
 
   <div class="image-container-mobile">
-    <picture>
-      <source media="(max-width: 768px)" srcset="1amb.png">
-      <img src="1a.png" alt="IABCE 2026 Introduction">
-    </picture>
+    <img src="1amb.png" alt="IABCE 2026 Introduction">
   </div>
 
 </body>
