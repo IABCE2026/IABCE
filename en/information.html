@@ -71,8 +71,35 @@
 
     /* Mobile styles */
     @media only screen and (max-width: 768px) {
-      .nav-container {
+      /* New mobile header structure */
+      .mobile-header {
+        position: absolute;
         top: 10px;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .mobile-logo-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 10px;
+      }
+      
+      .mobile-logo {
+        width: 80px;
+        height: auto;
+        pointer-events: none;
+      }
+      
+      .mobile-nav-container {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
       }
       
       .nav-link {
@@ -80,22 +107,15 @@
         font-size: 0.9em;
       }
       
+      /* Hide desktop navigation and logos on mobile */
+      .nav-container,
       .top-left,
       .top-right {
-        width: 80px;
-        top: 10px;
-      }
-      
-      .top-left {
-        left: 10px;
-      }
-      
-      .top-right {
-        right: 10px;
+        display: none;
       }
       
       .image-container {
-        padding-top: 70px;
+        padding-top: 140px;
       }
       
       .image-container img.desktop-img {
@@ -112,6 +132,11 @@
     }
     
     @media only screen and (min-width: 769px) {
+      /* Hide mobile header on desktop */
+      .mobile-header {
+        display: none;
+      }
+      
       .image-container img.mobile-img {
         display: none;
       }
@@ -120,6 +145,20 @@
 </head>
 <body>
 
+  <!-- Mobile Header (only visible on mobile) -->
+  <div class="mobile-header">
+    <div class="mobile-logo-row">
+      <img src="InfoPageImg4.png" alt="Logo" class="mobile-logo">
+      <img src="InfoPageImg3.png" alt="Logo" class="mobile-logo">
+    </div>
+    <div class="mobile-nav-container">
+      <a class="nav-link" href="../index.html">BACK</a>
+      <a class="nav-link" href="aims-objectives.html">AIMS & OBJECTIVES</a>
+      <a class="nav-link" href="scan-qr.html">SCAN QR CODE</a>
+    </div>
+  </div>
+
+  <!-- Desktop Elements (only visible on desktop) -->
   <!-- Top Left Logo -->
   <img src="InfoPageImg4.png" alt="Logo" class="top-left">
 
