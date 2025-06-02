@@ -38,12 +38,23 @@
             width: 100%;
             height: 100vh; /* Original desktop height */
             overflow: hidden;
+            display: flex; /* Use flex to center the picture element */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-wrapper picture {
+            width: 100%;
+            height: 100%;
+            display: flex; /* Flex on picture to center img inside it */
+            justify-content: center;
+            align-items: center;
         }
 
         .image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill; /* Original desktop object-fit */
+            width: 100%; /* For desktop, fill the wrapper */
+            height: 100%; /* For desktop, fill the wrapper */
+            object-fit: fill; /* Original desktop object-fit for 2a.png */
             display: block;
         }
 
@@ -73,21 +84,21 @@
         /* Media query for screens up to 768px wide */
         @media (max-width: 768px) {
             .top-left {
-                width: 100px; /* Make corner images smaller */
-                top: 15px; /* Slightly lower from top */
-                left: 15px; /* Some padding from left */
-                right: auto; /* Ensure it stays left */
+                width: 100px;
+                top: 15px;
+                left: 15px;
+                right: auto;
             }
 
             .top-right {
-                width: 100px; /* Make corner images smaller */
-                top: 15px; /* Slightly lower from top */
-                right: 15px; /* Some padding from right */
-                left: auto; /* Ensure it stays right */
+                width: 100px;
+                top: 15px;
+                right: 15px;
+                left: auto;
             }
 
             .back-link {
-                top: 40px; /* Adjust vertical position for mobile to be between logos */
+                top: 40px; /* Adjust vertical position */
                 left: 50%; /* Center horizontally */
                 transform: translateX(-50%); /* Center horizontally */
                 padding: 6px 15px;
@@ -96,47 +107,48 @@
 
             .image-wrapper {
                 height: auto; /* Allow height to adjust for mobile */
-                /* Adjust padding to control overall height and spacing */
-                padding-top: 80px; /* Adjust this to push image down below the header elements */
+                padding-top: 80px; /* Push image down below header elements */
                 padding-bottom: 20px;
             }
 
+            .image-wrapper picture,
             .image-wrapper img {
                 width: 95%; /* Make the main image slightly smaller than full width */
                 height: auto; /* Maintain aspect ratio */
                 object-fit: contain; /* Ensure the entire image is visible, no cropping */
-                display: block; /* Ensure it behaves correctly */
+                display: block;
                 margin: 0 auto; /* Center image horizontally */
             }
         }
 
-        /* Media query for screens up to 480px wide (common for most mobile phones in portrait) */
+        /* Media query for screens up to 480px wide */
         @media (max-width: 480px) {
             .top-left {
-                width: 70px; /* Even smaller */
+                width: 70px;
                 top: 10px;
                 left: 10px;
             }
 
             .top-right {
-                width: 70px; /* Even smaller */
+                width: 70px;
                 top: 10px;
                 right: 10px;
             }
 
             .back-link {
-                top: 30px; /* Adjust vertical position */
+                top: 30px;
                 padding: 5px 10px;
                 font-size: 0.8rem;
             }
 
             .image-wrapper {
-                padding-top: 60px; /* Adjust this to push image down */
+                padding-top: 60px;
                 padding-bottom: 10px;
             }
 
+            .image-wrapper picture,
             .image-wrapper img {
-                width: 98%; /* Almost full width for the main image */
+                width: 98%;
             }
         }
 
@@ -145,12 +157,13 @@
 <body>
 
     <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
-
     <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
 
     <div class="image-wrapper">
         <a href="information.html" class="back-link">BACK</a>
-        <img src="2a.png" alt="Aims and Objectives">
+        
+        <picture>
+            <source media="(max-width: 768px)" srcset="2amb.png"> <img src="2a.png" alt="Aims and Objectives"> </picture>
     </div>
 
 </body>
