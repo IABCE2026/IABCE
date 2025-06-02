@@ -83,7 +83,7 @@
         /* Mobile specific corner images */
         .top-left-mobile,
         .top-right-mobile {
-            position: absolute;
+            position: absolute; /* Keep absolute for precise positioning */
             height: auto;
             z-index: 9999;
             pointer-events: none;
@@ -96,7 +96,7 @@
             transform: translateX(-50%);
             display: flex;
             flex-direction: row;
-            gap: 15px; /* Space between links */
+            gap: 10px; /* Reduced gap between buttons for smaller size */
             z-index: 100;
             white-space: nowrap; /* Prevent links from wrapping */
         }
@@ -107,10 +107,10 @@
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
             font-weight: 600;
-            padding: 6px 15px;
+            padding: 4px 10px; /* Smaller padding for smaller buttons */
             border: 1px solid #e11915;
             border-radius: 6px;
-            font-size: 0.9rem; /* Smaller font for mobile links */
+            font-size: 0.75rem; /* Smaller font size */
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -146,24 +146,25 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100px; /* Adjust height as needed for logos + buttons */
+                /* Height set to accommodate logos and buttons, adjust as needed */
+                height: 120px; /* Increased height to fit logos and buttons underneath */
                 z-index: 10; /* Ensure it's on top */
             }
 
             .top-left-mobile {
-                width: 100px; /* Mobile logo size */
+                width: 90px; /* Slightly smaller logo size to prevent mix */
                 top: 15px;
                 left: 15px;
             }
 
             .top-right-mobile {
-                width: 100px; /* Mobile logo size */
+                width: 90px; /* Slightly smaller logo size to prevent mix */
                 top: 15px;
                 right: 15px;
             }
 
             .mobile-nav-wrapper {
-                top: 55px; /* Position below logos, adjust if needed */
+                top: 75px; /* Positioned further down, underneath logos */
             }
 
             /* Main image container for mobile */
@@ -173,7 +174,7 @@
                 align-items: center;
                 height: auto; /* Allow height to adjust based on image content */
                 min-height: 100vh; /* Ensure it covers full viewport height */
-                padding-top: 100px; /* Space for the fixed mobile header */
+                padding-top: 120px; /* Space for the fixed mobile header (match header-mobile height) */
                 box-sizing: border-box; /* Include padding in height */
             }
             
@@ -198,29 +199,29 @@
         /* Styles for screens up to 480px wide (Smaller phones) */
         @media (max-width: 480px) {
             .header-mobile {
-                height: 80px; /* Adjust height for smaller header */
+                height: 90px; /* Adjust height for smaller header */
             }
 
             .top-left-mobile,
             .top-right-mobile {
-                width: 70px; /* Smaller mobile logo size */
+                width: 60px; /* Even smaller logo size */
                 top: 10px;
                 left: 10px;
                 right: 10px;
             }
 
             .mobile-nav-wrapper {
-                top: 40px; /* Adjust further for smaller screens */
-                gap: 10px;
+                top: 55px; /* Adjust further down for smaller screens */
+                gap: 8px; /* Even smaller gap */
             }
 
             .mobile-nav-wrapper .nav-link-mobile {
-                padding: 5px 10px;
-                font-size: 0.8rem;
+                padding: 3px 8px; /* Even smaller padding */
+                font-size: 0.7rem; /* Even smaller font size */
             }
 
             .image-container-mobile {
-                padding-top: 80px; /* Adjust padding for smaller header */
+                padding-top: 90px; /* Adjust padding for smaller header */
             }
         }
     </style>
