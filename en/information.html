@@ -87,6 +87,7 @@
             height: auto;
             z-index: 9999;
             pointer-events: none;
+            box-sizing: border-box; /* Ensure padding/borders don't push it in */
         }
 
         /* Mobile specific navigation buttons wrapper */
@@ -146,8 +147,8 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                /* Increased height to accommodate logos and buttons *further* down */
-                height: 140px; /* Adjusted height */
+                /* Increased height to accommodate logos and buttons *much* further down */
+                height: 180px; /* Adjusted height */
                 z-index: 10; /* Ensure it's on top */
             }
 
@@ -160,13 +161,13 @@
             .top-right-mobile {
                 width: 90px;
                 top: 15px;
-                /* Use right: 15px to ensure it's firmly on the right edge */
-                right: 15px;
+                /* Crucial change: Set right to 0px to push it to the absolute edge */
+                right: 0px; /* Adjusted right value to ensure it's on the edge */
             }
 
             .mobile-nav-wrapper {
-                /* Pushed further down */
-                top: 90px; /* Adjusted top to make buttons much lower */
+                /* Pushed even further down */
+                top: 130px; /* Adjusted top to make buttons much lower */
             }
 
             /* Main image container for mobile */
@@ -177,7 +178,7 @@
                 height: auto; /* Allow height to adjust based on image content */
                 min-height: 100vh; /* Ensure it covers full viewport height */
                 /* Padding top adjusted to match new header-mobile height */
-                padding-top: 140px; /* Adjusted padding to match new header height */
+                padding-top: 180px; /* Adjusted padding to match new header height */
                 box-sizing: border-box; /* Include padding in height */
             }
             
@@ -202,7 +203,7 @@
         /* Styles for screens up to 480px wide (Smaller phones) */
         @media (max-width: 480px) {
             .header-mobile {
-                height: 110px; /* Adjusted height for smaller header */
+                height: 150px; /* Adjusted height for smaller header */
             }
 
             .top-left-mobile,
@@ -210,11 +211,12 @@
                 width: 60px; /* Smaller logo size */
                 top: 10px;
                 left: 10px;
-                right: 10px; /* Ensure it's firmly on the right edge */
+                /* Crucial change: Set right to 0px for smaller screens too */
+                right: 0px; /* Adjusted right value to ensure it's on the edge */
             }
 
             .mobile-nav-wrapper {
-                top: 70px; /* Adjusted further down for smaller screens */
+                top: 105px; /* Adjusted further down for smaller screens */
                 gap: 8px; /* Even smaller gap */
             }
 
@@ -224,7 +226,7 @@
             }
 
             .image-container-mobile {
-                padding-top: 110px; /* Adjusted padding for smaller header */
+                padding-top: 150px; /* Adjusted padding for smaller header */
             }
         }
     </style>
