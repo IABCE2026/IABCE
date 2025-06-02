@@ -50,24 +50,7 @@
       right: 20px;
     }
 
-    .image-container-desktop {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding-top: 100px;
-      box-sizing: border-box;
-    }
-
-    .image-container-desktop img {
-      width: 1920px;
-      height: 1080px;
-      max-width: 113%;
-      max-height: 113vh;
-      object-fit: fill;
-      border-radius: 10px;
-      display: block;
-    }
+    /* Removed duplicated desktop image block */
 
     /* MOBILE STYLES */
     .header-mobile,
@@ -131,7 +114,7 @@
       align-items: center;
       flex-direction: column;
       padding: 0;
-      margin-top: 165px; /* sits right underneath the 3 buttons */
+      margin-top: 165px; /* Sits right underneath the 3 buttons */
       box-sizing: border-box;
     }
 
@@ -147,8 +130,7 @@
       /* Hide desktop */
       .nav-container-desktop,
       .top-left-desktop,
-      .top-right-desktop,
-      .image-container-desktop {
+      .top-right-desktop {
         display: none;
       }
 
@@ -185,7 +167,7 @@
       }
 
       .image-container-mobile {
-        margin-top: 145px; /* adjusted for smaller screens */
+        margin-top: 140px;
       }
     }
   </style>
@@ -200,10 +182,6 @@
     <a class="nav-link-desktop" href="../index.html">BACK</a>
     <a class="nav-link-desktop" href="aims-objectives.html">AIMS & OBJECTIVES</a>
     <a class="nav-link-desktop" href="scan-qr.html">SCAN QR CODE</a>
-  </div>
-
-  <div class="image-container-desktop">
-    <img src="1a.png" alt="IABCE 2026 Introduction">
   </div>
 
   <!-- MOBILE VERSION -->
