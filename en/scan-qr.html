@@ -1,90 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Scan QR Code</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Qr Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+            display: flex;
+            flex-direction: column; /* Allows main-content to push footer down if needed */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+        }
 
-    body, html {
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-    }
+        /* Common Styles for Top Logos */
+        .top-left,
+        .top-right {
+            position: absolute;
+            height: auto; /* Maintain aspect ratio */
+            z-index: 9999;
+            pointer-events: none; /* Allows clicks to pass through */
+        }
 
-       /* Corner images brought to front */
-    .top-left,
-    .top-right {
-      position: absolute;
-      top: 20px;
-      width: 150px;
-      height: auto;
-      z-index: 9999; /* highest priority */
-      pointer-events: none; /* ensures clicks go through */
-    }
+        /* Back Link Common Styles */
+        .back-link {
+            position: absolute; /* Positioned relative to the nearest positioned ancestor (body or main-content) */
+            color: #e11915;
+            background-color: rgba(0, 0, 0, 0.6);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            border: 1px solid #e11915;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
 
-    .top-left {
-      left: 20px;
-    }
+        .back-link:hover {
+            background-color: #e11915;
+            color: #000;
+        }
 
-    .top-right {
-      right: 20px;
-    }
-    
-    .image-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+        /* Main Content Wrapper */
+        .main-content {
+            position: relative; /* Crucial for absolute positioning of back-link */
+            flex-grow: 1; /* Allows this div to take up available vertical space */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            padding-top: 100px; /* Space for absolute positioned logos and back button */
+            padding-bottom: 20px; /* A little space at the bottom */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
+        }
 
-    .image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill; /* fills screen, may crop */
-      display: block;
-    }
+        /* Picture and Image within main-content */
+        .main-content picture,
+        .main-content img {
+            max-width: 100%; /* Image will not exceed the width of its parent */
+            max-height: 100%; /* Image will not exceed the height of its parent */
+            display: block; /* Remove extra space below image */
+            object-fit: contain; /* IMPORTANT: Maintain aspect ratio, fully visible */
+            margin: auto; /* Center the image within the flex container */
+        }
 
-    .back-link {
-      position: absolute;
-      top: 80px;
-      left: 200px;
-      color: #e11915;
-      background-color: rgba(0, 0, 0, 0.5);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 8px 20px;
-      border: 1px solid #e11915;
-      border-radius: 6px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
+        /* --- DESKTOP-SPECIFIC STYLES (Default / Base) --- */
+        .top-left {
+            top: 20px;
+            left: 20px;
+            width: 150px;
+        }
 
-    .back-link:hover {
-      background-color: #e11915;
-      color: #000;
-    }
-  </style>
+        .top-right {
+            top: 20px;
+            right: 20px;
+            width: 150px;
+        }
+
+        .back-link {
+            top: 80px;
+            left: 300px; /* Fixed position for desktop */
+        }
+
+
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+
+        /* Tablets and larger phones (up to 1024px) */
+        @media (max-width: 1024px) {
+            .back-link {
+                left: 50%; /* Center horizontally */
+                transform: translateX(-50%); /* Adjust for true centering */
+                top: 60px; /* Adjust top position for smaller screens */
+                padding: 7px 18px; /* Slightly smaller padding */
+                font-size: 0.95rem; /* Slightly smaller font size */
+            }
+
+            .top-left,
+            .top-right {
+                width: 130px; /* Slightly smaller logos */
+                top: 18px;
+            }
+
+            .main-content {
+                padding-top: 120px; /* More space for adjusted header elements */
+            }
+        }
+
+
+        /* Mobile devices (max-width 768px - includes typical tablets in portrait) */
+        @media (max-width: 768px) {
+            .top-left {
+                width: 120px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .top-right {
+                width: 120px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .back-link {
+                top: 80px; /* Position below top logos and adjust for mobile image height */
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .main-content {
+                /* On mobile, we might want the image to start closer to the top after the header */
+                justify-content: flex-start; /* Align image to the top of the flex container */
+                padding-top: 100px; /* Ensure space for header elements on mobile */
+                padding-bottom: 10px; /* Less padding on mobile */
+            }
+
+            .main-content picture,
+            .main-content img {
+                /* No specific height needed here, max-height and object-fit: contain will handle it */
+            }
+        }
+
+        /* Smaller mobile devices (max-width 480px) */
+        @media (max-width: 480px) {
+            .top-left {
+                width: 90px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .top-right {
+                width: 90px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .back-link {
+                top: 60px; /* Even higher for smaller phones */
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                padding-top: 80px; /* Further adjust padding for very small screens */
+            }
+        }
+
+    </style>
 </head>
 <body>
 
-    <!-- Top Left Logo -->
-  <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
+    <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left">
+    <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
 
-  <!-- Top Right Logo -->
-  <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right">
-
-  <div class="image-wrapper">
-    <a href="information.html" class="back-link">BACK</a>
-    <img src="3a.png" alt="Scan QR Code">
-  </div>
+    <div class="main-content">
+        <a href="information.html" class="back-link">BACK</a>
+        
+        <picture>
+            <source media="(max-width: 768px)" srcset="3amb.png">
+            <img src="3a.png" alt="Scan Qr Code">
+        </picture>
+    </div>
 
 </body>
 </html>
