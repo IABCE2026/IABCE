@@ -1,263 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Language Selection</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Selection</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
 
-        body, html {
-            height: 100%;
-            width: 100%;
-            background-color: #000;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            position: relative; /* Needed for absolutely positioned mobile header */
-        }
+    body, html {
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      overflow: hidden;
+    }
 
-        /* --- DESKTOP STYLES (Default - no changes to these) --- */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('front4.png') no-repeat center center; /* Desktop background */
-            background-size: contain;
-            background-color: #000;
-            position: relative; /* Needed for z-index of overlay-box */
-            z-index: 1; /* Default z-index */
-        }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('front4.png') no-repeat center center;
+      background-size: contain;
+      background-color: #000;
+    }
 
-        /* The picture element is for mobile background, hidden on desktop */
-        .container picture {
-            display: none; /* Hide picture element on desktop */
-        }
+    .overlay-box {
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
 
-        .overlay-box {
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            z-index: 2; /* Ensure it's above background */
-        }
+    .overlay-box h2 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
 
-        .overlay-box h2 {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
+    .overlay-box p {
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
 
-        .overlay-box p {
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.04em;
-        }
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+    }
 
-        .buttons {
-            display: flex;
-            justify-content: space-around;
-        }
+    .buttons button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        .buttons button {
-            background-color: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 0.6rem 1.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .buttons button:hover {
-            background-color: #fff;
-            color: #000;
-        }
-
-        /* --- MOBILE-SPECIFIC STYLES (New elements and overrides for mobile) --- */
-
-        /* Mobile Header elements (hidden by default, shown on mobile) */
-        .header-mobile {
-            display: none; /* Hidden on desktop */
-        }
-
-        .top-left-mobile,
-        .top-right-mobile {
-            position: absolute;
-            height: auto;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        .mobile-buttons-wrapper {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 15px;
-            z-index: 100;
-        }
-
-        .mobile-buttons-wrapper button {
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #e11915; /* Red color for back button style */
-            border: 1px solid #e11915;
-            border-radius: 6px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .mobile-buttons-wrapper button:hover {
-            background-color: #e11915;
-            color: #000;
-        }
-
-        /* Media query for screens up to 768px wide (Tablets in portrait, larger phones) */
-        @media (max-width: 768px) {
-            body, html {
-                overflow-y: auto; /* Allow vertical scroll on mobile */
-            }
-
-            /* Show mobile header */
-            .header-mobile {
-                display: block;
-                position: absolute; /* Position relative to body */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100px; /* Adjust height as needed for logos + buttons */
-                z-index: 10; /* Ensure it's on top */
-            }
-
-            .top-left-mobile {
-                width: 100px; /* Mobile logo size */
-                top: 15px;
-                left: 15px;
-            }
-
-            .top-right-mobile {
-                width: 100px; /* Mobile logo size */
-                top: 15px;
-                right: 15px;
-            }
-
-            .mobile-buttons-wrapper {
-                top: 55px; /* Position below logos, adjust if needed */
-                padding: 6px 15px;
-                font-size: 0.9rem;
-            }
-
-            .mobile-buttons-wrapper button {
-                padding: 6px 15px;
-                font-size: 0.9rem;
-            }
-
-            /* Container changes for mobile */
-            .container {
-                background: none; /* Remove desktop background image from CSS */
-                height: auto; /* Allow height to adjust */
-                min-height: 100vh; /* Ensure it covers full viewport height */
-                padding-top: 100px; /* Space for the fixed mobile header */
-                display: block; /* Change display for background image only */
-            }
-            
-            /* Show picture element for mobile background */
-            .container picture {
-                display: block; /* Show picture element on mobile */
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%; /* Make image fill the container's height */
-                z-index: 0; /* Ensure it's behind other content */
-            }
-
-            .container picture img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover; /* Cover the background, possibly cropping */
-                display: block;
-            }
-
-            /* Hide overlay box on mobile */
-            .overlay-box {
-                display: none;
-            }
-        }
-
-        /* Media query for screens up to 480px wide (Smaller phones) */
-        @media (max-width: 480px) {
-            .header-mobile {
-                height: 80px; /* Adjust height for smaller header */
-            }
-
-            .top-left-mobile,
-            .top-right-mobile {
-                width: 70px; /* Smaller mobile logo size */
-                top: 10px;
-                left: 10px;
-                right: 10px;
-            }
-
-            .mobile-buttons-wrapper {
-                top: 40px; /* Adjust further for smaller screens */
-                gap: 10px;
-            }
-
-            .mobile-buttons-wrapper button {
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-
-            .container {
-                padding-top: 80px; /* Adjust padding for smaller header */
-            }
-        }
-    </style>
+    .buttons button:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  </style>
 </head>
 <body>
-    <div class="header-mobile">
-        <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left-mobile">
-        <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right-mobile">
-        <div class="mobile-buttons-wrapper">
-            <button onclick="selectLanguage('en')">ENGLISH</button>
-            <button onclick="selectLanguage('zh')">中文</button>
-        </div>
+  <div class="container">
+    <div class="overlay-box">
+      <h2>PLEASE SELECT YOUR LANGUAGE</h2>
+      <p>请选择您的语言</p>
+      <div class="buttons">
+        <button onclick="selectLanguage('en')">ENGLISH</button>
+        <button onclick="selectLanguage('zh')">中文</button>
+      </div>
     </div>
+  </div>
 
-    <div class="container">
-        <picture>
-            <source media="(max-width: 768px)" srcset="1amb.png"> <img src="front4.png" alt="Background Image">
-        </picture>
-
-        <div class="overlay-box">
-            <h2>PLEASE SELECT YOUR LANGUAGE</h2>
-            <p>请选择您的语言</p>
-            <div class="buttons">
-                <button onclick="selectLanguage('en')">ENGLISH</button>
-                <button onclick="selectLanguage('zh')">中文</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function selectLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = './en/information.html';
-            } else if (lang === 'zh') {
-                window.location.href = './zh/information.html';
-            }
-        }
-    </script>
+  <script>
+    /**
+     * Redirect the user to the correct information page
+     * for the language they chose.  Adjust the paths
+     * (“./en/information.html” and “./zh/information.html”)
+     * to match your GitHub Pages folder structure.
+     */
+    function selectLanguage(lang) {
+      if (lang === 'en') {
+        window.location.href = './en/information.html';
+      } else if (lang === 'zh') {
+        window.location.href = './zh/information.html';
+      }
+    }
+  </script>
 </body>
 </html>
