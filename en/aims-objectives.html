@@ -13,13 +13,13 @@
             overflow-x: hidden; /* Prevents horizontal scroll */
         }
 
-        /* --- DESKTOP-SPECIFIC STYLES (Your original, kept as is for desktop) --- */
+        /* --- DESKTOP-SPECIFIC STYLES --- */
 
         .top-left,
         .top-right {
             position: absolute;
             top: 20px;
-            width: 150px; /* Original desktop width */
+            width: 150px;
             height: auto;
             z-index: 9999;
             pointer-events: none;
@@ -34,11 +34,11 @@
         }
         
         .image-wrapper {
-            position: relative; /* Keep this for back-link positioning */
+            position: relative;
             width: 100%;
-            height: 100vh; /* Original desktop height */
+            height: 100vh; /* Desktop height */
             overflow: hidden;
-            display: flex; /* Use flex to center the picture element */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -46,22 +46,22 @@
         .image-wrapper picture {
             width: 100%;
             height: 100%;
-            display: flex; /* Flex on picture to center img inside it */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .image-wrapper img {
-            width: 100%; /* For desktop, fill the wrapper */
-            height: 100%; /* For desktop, fill the wrapper */
-            object-fit: fill; /* Original desktop object-fit for 2a.png */
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Desktop image will fill its space */
             display: block;
         }
 
         .back-link {
             position: absolute;
-            top: 80px;      /* Original desktop position */
-            left: 300px;    /* Original desktop position */
+            top: 80px;
+            left: 300px;
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
             text-decoration: none;
@@ -79,78 +79,83 @@
             color: #000;
         }
 
-        /* --- MOBILE-SPECIFIC STYLES (Apply ONLY when screen is small) --- */
+        /* --- MOBILE-SPECIFIC STYLES --- */
 
         /* Media query for screens up to 768px wide */
         @media (max-width: 768px) {
             .top-left {
-                width: 110px; /* Increased from 100px */
+                width: 120px;
                 top: 15px;
                 left: 15px;
                 right: auto;
             }
 
             .top-right {
-                width: 110px; /* Increased from 100px */
+                width: 120px;
                 top: 15px;
                 right: 15px;
                 left: auto;
             }
 
             .back-link {
-                top: 40px; /* Vertical position unchanged */
+                top: 40px;
                 left: 50%;
                 transform: translateX(-50%);
-                padding: 6px 15px; /* Back button size unchanged */
-                font-size: 0.9rem; /* Back button font size unchanged */
+                padding: 6px 15px;
+                font-size: 0.9rem;
             }
 
             .image-wrapper {
-                height: auto;
-                min-height: calc(100vh - 60px); /* Adjust 60px as needed */
-                padding-top: 90px; /* Slightly increased padding-top to give more space from top elements */
-                /* padding-bottom removed to allow full height */
+                height: auto; /* Allow height to adjust */
+                min-height: 100vh; /* Make wrapper at least full viewport height */
+                padding-top: 90px; /* Space for header elements */
+                padding-bottom: 0; /* Remove any bottom padding */
+                box-sizing: border-box; /* Include padding in height calculation */
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 110%; /* Full width for main image */
-                height: 110%; /* Maintain aspect ratio */
-                object-fit: contain; /* Keep entire image visible without cropping */
+                width: 100%; /* Fill width */
+                height: 100%; /* Make image fill the image-wrapper's height */
+                object-fit: fill; /* Stretch to fill, will distort if aspect ratio is off */
+                /* object-fit: contain; /* Alternative: keeps aspect ratio, might leave black bars if container is taller */
                 display: block;
-                margin: 0 auto; /* Center image horizontally */
+                margin: 0; /* Remove auto margin to ensure it adheres to 100% width/height */
             }
         }
 
         /* Media query for screens up to 480px wide */
         @media (max-width: 480px) {
             .top-left {
-                width: 90px; /* Increased from 70px */
+                width: 90px;
                 top: 10px;
                 left: 10px;
             }
 
             .top-right {
-                width: 90px; /* Increased from 70px */
+                width: 90px;
                 top: 10px;
                 right: 10px;
             }
 
             .back-link {
-                top: 30px; /* Vertical position unchanged */
-                padding: 5px 10px; /* Back button size unchanged */
-                font-size: 0.8rem; /* Back button font size unchanged */
+                top: 30px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
             }
 
             .image-wrapper {
-                min-height: calc(100vh - 50px); /* Adjust 50px as needed */
-                padding-top: 70px; /* Slightly increased padding-top */
-                /* padding-bottom removed */
+                min-height: 100vh; /* Ensure it's at least full viewport height */
+                padding-top: 70px;
+                padding-bottom: 0; /* Remove any bottom padding */
             }
 
             .image-wrapper picture,
             .image-wrapper img {
-                width: 100%; /* Full width for very small screens too */
+                width: 100%;
+                height: 100%; /* Image fills its wrapper */
+                object-fit: fill; /* Stretch to fill */
+                /* object-fit: contain; */
             }
         }
 
