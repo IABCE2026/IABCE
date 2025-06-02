@@ -8,13 +8,13 @@
     <style>
         body {
             margin: 0;
-            background-color: #000; /* Main body background color */
+            background-color: #000; /* Page background color */
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden; /* Prevents horizontal scroll */
             display: flex;
-            flex-direction: column; /* Allows main-content to push footer down if needed */
+            flex-direction: column;
             min-height: 100vh; /* Ensure body takes at least full viewport height */
-            position: relative; /* Needed for body to be positioning context for absolute elements if main-content isn't */
+            position: relative; /* Base for absolute positioning */
         }
 
         /* Common Styles for Top Logos */
@@ -22,15 +22,15 @@
         .top-right {
             position: absolute;
             height: auto; /* Maintain aspect ratio */
-            z-index: 9999;
+            z-index: 9999; /* Ensure they are on top */
             pointer-events: none; /* Allows clicks to pass through */
         }
 
         /* Back Link Common Styles */
         .back-link {
-            position: absolute; /* Positioned relative to the nearest positioned ancestor (body or main-content) */
+            position: absolute; /* Positioned relative to main-content */
             color: #e11915;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
             text-decoration: none;
             font-weight: 600;
             padding: 8px 20px;
@@ -38,7 +38,7 @@
             border-radius: 6px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            z-index: 10;
+            z-index: 10; /* Ensure it's above the image */
         }
 
         .back-link:hover {
@@ -51,16 +51,12 @@
             position: relative; /* Crucial for absolute positioning of back-link */
             flex-grow: 1; /* Allows this div to take up available vertical space */
             width: 100%;
-            height: 100vh; /* Ensures it takes full viewport height for image to scale within */
+            height: 100vh; /* Make it take full viewport height on desktop */
             display: flex;
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
-            padding-top: 0; /* No padding at the top, let image take available space */
-            padding-bottom: 0; /* No padding at the bottom */
-            box-sizing: border-box; /* Include padding in the element's total width and height */
-            /* IMPORTANT: Set the background color here to match your image's background */
-            /* This will fill the "empty" space on desktop while object-fit: contain ensures image integrity */
-            background-color: #000; /* CHANGE THIS to match the background color of your '3a.png' image */
+            box-sizing: border-box; /* Include padding in the element's total size */
+            background-color: #000; /* Ensure main content background is black to match body/image */
         }
 
         /* Picture and Image within main-content */
@@ -69,7 +65,8 @@
             width: 100%; /* Image will try to take 100% of parent width */
             height: 100%; /* Image will try to take 100% of parent height */
             display: block; /* Remove extra space below image */
-            object-fit: contain; /* IMPORTANT: Scales to fit, maintaining aspect ratio. Will show letterboxing/pillarboxing which is filled by main-content background. */
+            /* THIS IS THE KEY CHANGE TO MAKE IT "FIX" TO THE PAGE */
+            object-fit: cover; /* Scales to cover the container, might crop parts of the image */
             margin: auto; /* Center the image within the flex container */
         }
 
@@ -114,7 +111,6 @@
             }
         }
 
-
         /* Mobile devices (max-width 768px - includes typical tablets in portrait) */
         @media (max-width: 768px) {
             .top-left {
@@ -141,13 +137,13 @@
                 height: auto; /* Allow content to dictate height on smaller screens */
                 min-height: calc(100vh - 100px); /* Ensure main content still takes significant vertical space */
                 padding-bottom: 10px; /* Less padding on mobile */
-                background-color: #000; /* Ensure mobile also uses the same background if desired */
             }
 
             .main-content img {
                 width: 90%; /* On mobile, make image take up 90% width of its parent */
                 height: auto; /* Let height be auto to maintain aspect ratio */
                 max-height: calc(100vh - 120px); /* Limit image height to prevent it from overflowing vertically */
+                object-fit: contain; /* On mobile, usually better to contain to prevent accidental cropping */
             }
         }
 
