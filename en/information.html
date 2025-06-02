@@ -11,14 +11,14 @@
             background-color: #000;
             font-family: 'Poppins', sans-serif;
             color: #e11915;
-            position: relative; /* Needed for absolutely positioned mobile header */
+            position: relative; /* Needed for absolutely positioned elements */
             overflow-x: hidden; /* Prevents horizontal scroll */
         }
 
-        /* --- DESKTOP-SPECIFIC STYLES (Your original, kept as is for desktop) --- */
+        /* --- DESKTOP-SPECIFIC STYLES (NO CHANGES HERE) --- */
 
-        /* Top-centered nav */
-        .nav-container {
+        /* Top-centered nav for desktop */
+        .nav-container-desktop {
             width: 100%;
             text-align: center;
             position: absolute;
@@ -26,7 +26,7 @@
             z-index: 100;
         }
 
-        .nav-link {
+        .nav-link-desktop {
             margin: 0 40px;
             color: #e11915;
             font-weight: 600;
@@ -34,9 +34,9 @@
             font-size: 1.2em;
         }
 
-        /* Corner images brought to front */
-        .top-left,
-        .top-right {
+        /* Corner images for desktop */
+        .top-left-desktop,
+        .top-right-desktop {
             position: absolute;
             top: 20px;
             width: 150px;
@@ -45,48 +45,42 @@
             pointer-events: none; /* ensures clicks go through */
         }
 
-        .top-left {
+        .top-left-desktop {
             left: 20px;
         }
 
-        .top-right {
+        .top-right-desktop {
             right: 20px;
         }
 
-        /* Main image container */
-        .image-container {
+        /* Main image container for desktop */
+        .image-container-desktop {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             padding-top: 100px; /* Space for desktop header */
             box-sizing: border-box;
-            position: relative; /* For picture element positioning */
         }
 
-        /* Desktop image styling */
-        .image-container img {
-            width: 1920px; /* Specific desktop width */
-            height: 1080px; /* Specific desktop height */
-            max-width: 113%; /* Allows it to slightly exceed viewport width */
-            max-height: 113vh; /* Allows it to slightly exceed viewport height */
-            object-fit: fill; /* Fills the space, may distort */
+        /* Desktop specific image styling */
+        .image-container-desktop img {
+            width: 1920px;
+            height: 1080px;
+            max-width: 113%;
+            max-height: 113vh;
+            object-fit: fill;
             border-radius: 10px;
-            display: block; /* Ensure it's a block element */
+            display: block;
         }
 
-        /* Hide picture element on desktop, as img is directly styled */
-        .image-container picture {
-            display: none;
+        /* --- MOBILE-SPECIFIC ELEMENTS (HIDDEN ON DESKTOP) --- */
+        .header-mobile,
+        .image-container-mobile {
+            display: none; /* Hide all mobile elements by default */
         }
 
-        /* --- MOBILE-SPECIFIC STYLES (New elements and overrides for mobile) --- */
-
-        /* Mobile Header elements - Hidden on Desktop, Shown on Mobile */
-        .header-mobile {
-            display: none; /* Hidden on desktop by default */
-        }
-
+        /* Mobile specific corner images */
         .top-left-mobile,
         .top-right-mobile {
             position: absolute;
@@ -95,6 +89,7 @@
             pointer-events: none;
         }
 
+        /* Mobile specific navigation buttons wrapper */
         .mobile-nav-wrapper {
             position: absolute;
             left: 50%;
@@ -106,6 +101,7 @@
             white-space: nowrap; /* Prevent links from wrapping */
         }
 
+        /* Mobile specific navigation link styling */
         .mobile-nav-wrapper .nav-link-mobile {
             color: #e11915;
             background-color: rgba(0, 0, 0, 0.6);
@@ -123,22 +119,29 @@
             color: #000;
         }
 
-        /* Media query for screens up to 768px wide (Tablets in portrait, larger phones) */
+        /* --- MEDIA QUERIES FOR MOBILE DEVICES --- */
+
+        /* Styles for screens up to 768px wide (Tablets in portrait, larger phones) */
         @media (max-width: 768px) {
             body, html {
                 overflow-y: auto; /* Allow vertical scroll on mobile */
             }
 
-            /* Hide desktop header elements */
-            .nav-container,
-            .top-left,
-            .top-right {
+            /* Hide all desktop elements */
+            .nav-container-desktop,
+            .top-left-desktop,
+            .top-right-desktop,
+            .image-container-desktop {
                 display: none;
             }
 
-            /* Show mobile header */
+            /* Show mobile header and main image container */
+            .header-mobile,
+            .image-container-mobile {
+                display: block; /* Show header-mobile as a block */
+            }
+
             .header-mobile {
-                display: block;
                 position: absolute; /* Position relative to body */
                 top: 0;
                 left: 0;
@@ -163,25 +166,26 @@
                 top: 55px; /* Position below logos, adjust if needed */
             }
 
-            /* Main image container changes for mobile */
-            .image-container {
+            /* Main image container for mobile */
+            .image-container-mobile {
+                display: flex; /* Use flex for centering */
+                justify-content: center;
+                align-items: center;
                 height: auto; /* Allow height to adjust based on image content */
                 min-height: 100vh; /* Ensure it covers full viewport height */
                 padding-top: 100px; /* Space for the fixed mobile header */
-                display: flex; /* Keep flex for centering */
-                justify-content: center;
-                align-items: center;
+                box-sizing: border-box; /* Include padding in height */
             }
             
-            /* Show picture element for mobile background */
-            .image-container picture {
+            /* Mobile specific image styling */
+            .image-container-mobile picture {
                 display: block; /* Show picture element on mobile */
                 width: 100%;
                 height: auto; /* Allow height to adjust */
                 margin: 0 auto; /* Center horizontally */
             }
 
-            .image-container picture img {
+            .image-container-mobile picture img {
                 width: 100%; /* Fill width */
                 height: auto; /* Maintain aspect ratio */
                 object-fit: contain; /* Keep entire image visible, allowing it to dictate height */
@@ -191,7 +195,7 @@
             }
         }
 
-        /* Media query for screens up to 480px wide (Smaller phones) */
+        /* Styles for screens up to 480px wide (Smaller phones) */
         @media (max-width: 480px) {
             .header-mobile {
                 height: 80px; /* Adjust height for smaller header */
@@ -215,13 +219,29 @@
                 font-size: 0.8rem;
             }
 
-            .image-container {
+            .image-container-mobile {
                 padding-top: 80px; /* Adjust padding for smaller header */
             }
         }
     </style>
 </head>
 <body>
+
+    <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left-desktop">
+
+    <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right-desktop">
+
+    <div class="nav-container-desktop">
+        <a class="nav-link-desktop" href="../index.html">BACK</a>
+        <a class="nav-link-desktop" href="aims-objectives.html">AIMS & OBJECTIVES</a>
+        <a class="nav-link-desktop" href="scan-qr.html">SCAN QR CODE</a>
+    </div>
+
+    <div class="image-container-desktop">
+        <img src="1a.png" alt="IABCE 2026 Introduction">
+    </div>
+
+
     <div class="header-mobile">
         <img src="InfoPageImg4.png" alt="Top Left Icon" class="top-left-mobile">
         <img src="InfoPageImg3.png" alt="Top Right Icon" class="top-right-mobile">
@@ -232,7 +252,7 @@
         </div>
     </div>
 
-    <div class="image-container">
+    <div class="image-container-mobile">
         <picture>
             <source media="(max-width: 768px)" srcset="1amb.png"> <img src="1a.png" alt="IABCE 2026 Introduction"> </picture>
     </div>
