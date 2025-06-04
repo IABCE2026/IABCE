@@ -1,166 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Language Selection</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
+    body, html {
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      overflow: hidden;
+    }
 
-        body, html {
-            height: 100%;
-            width: 100%;
-            background-color: #000;
-            overflow: hidden; /* Prevent scrolling if content overflows */
-        }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      background-image: url('front4.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%; /* Ensure container takes full width */
-            background-color: #000; /* Fallback background color */
+    .overlay-box {
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      max-width: 90%;
+    }
 
-            /* Desktop Background Image (Default) */
-            background-image: url('front4.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: contain; /* Maintain aspect ratio and fit within container */
-        }
+    .overlay-box h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
 
-        .overlay-box {
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            max-width: 90%; /* Prevent box from being too wide on small screens */
-            box-sizing: border-box; /* Include padding in max-width calculation */
-        }
+    .overlay-box p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
 
-        .overlay-box h2 {
-            font-size: 1.2rem; /* Slightly larger for better readability */
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
-        .overlay-box p {
-            font-size: 0.95rem; /* Slightly larger for better readability */
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.04em;
-        }
+    .buttons button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      flex-grow: 1;
+      min-width: 120px;
+    }
 
-        .buttons {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-            gap: 1rem; /* Space between buttons */
-        }
+    .buttons button:hover {
+      background-color: #fff;
+      color: #000;
+    }
 
-        .buttons button {
-            background-color: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 0.8rem 2rem; /* Slightly larger padding for better touch targets */
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            flex-grow: 1; /* Allow buttons to grow and share space */
-            min-width: 120px; /* Ensure buttons have a minimum width */
-        }
+    @media (max-width: 768px) {
+      .container {
+        background-image: url('front4mb.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
 
-        .buttons button:hover {
-            background-color: #fff;
-            color: #000;
-        }
+      .overlay-box {
+        padding: 1.5rem 2rem;
+      }
 
-        /* --- MOBILE-SPECIFIC STYLES --- */
+      .overlay-box h2 {
+        font-size: 1rem;
+      }
 
-        /* Media query for screens up to 768px wide */
-        @media (max-width: 768px) {
-            .container {
-                /* Mobile Background Image */
-                background-image: url('front4mb.png');
-                /* All other background properties remain the same (no-repeat, center center, contain) */
-            }
+      .overlay-box p {
+        font-size: 0.85rem;
+      }
 
-            .overlay-box {
-                padding: 1.5rem 2rem; /* Reduce padding on mobile */
-            }
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
 
-            .overlay-box h2 {
-                font-size: 1rem; /* Adjust font size for mobile */
-            }
+      .buttons button {
+        width: 100%;
+        max-width: 200px;
+        padding: 0.7rem 1.5rem;
+      }
+    }
 
-            .overlay-box p {
-                font-size: 0.85rem; /* Adjust font size for mobile */
-            }
+    @media (max-width: 480px) {
+      .overlay-box {
+        padding: 1rem 1.5rem;
+      }
 
-            .buttons {
-                flex-direction: column; /* Stack buttons vertically on small screens */
-                align-items: center; /* Center stacked buttons */
-            }
+      .overlay-box h2 {
+        font-size: 0.9rem;
+      }
 
-            .buttons button {
-                width: 100%; /* Full width for stacked buttons */
-                max-width: 200px; /* Limit max width for stacked buttons */
-                padding: 0.7rem 1.5rem; /* Adjust padding for mobile buttons */
-            }
-        }
-
-        /* Media query for very small screens (e.g., iPhone SE) */
-        @media (max-width: 480px) {
-            .overlay-box {
-                padding: 1rem 1.5rem; /* Even smaller padding */
-            }
-
-            .overlay-box h2 {
-                font-size: 0.9rem;
-            }
-
-            .overlay-box p {
-                font-size: 0.75rem;
-            }
-        }
-    </style>
+      .overlay-box p {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="overlay-box">
-            <h2>PLEASE SELECT YOUR LANGUAGE</h2>
-            <p>请选择您的语言</p>
-            <div class="buttons">
-                <button onclick="selectLanguage('en')">ENGLISH</button>
-                <button onclick="selectLanguage('zh')">中文</button>
-            </div>
-        </div>
+  <div class="container">
+    <div class="overlay-box" role="dialog" aria-labelledby="language-heading" aria-describedby="language-description">
+      <h2 id="language-heading">PLEASE SELECT YOUR LANGUAGE</h2>
+      <p id="language-description">请选择您的语言</p>
+      <div class="buttons">
+        <button onclick="selectLanguage('en')" aria-label="Select English">ENGLISH</button>
+        <button onclick="selectLanguage('zh')" aria-label="Select Chinese">中文</button>
+      </div>
     </div>
+  </div>
 
-    <script>
-        /**
-         * Redirect the user to the correct information page
-         * for the language they chose. Adjust the paths
-         * (“./en/information.html” and “./zh/information.html”)
-         * to match your GitHub Pages folder structure.
-         */
-        function selectLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = './en/information.html';
-            } else if (lang === 'zh') {
-                window.location.href = './zh/information.html';
-            }
-        }
-    </script>
+  <noscript>
+    <style>
+      .container { display: none; }
+    </style>
+    <div style="color: white; text-align: center; margin-top: 50px;">
+      JavaScript is required to use this page. Please enable JavaScript in your browser settings.
+    </div>
+  </noscript>
+
+  <script>
+    function selectLanguage(lang) {
+      if (lang === 'en') {
+        window.location.href = './en/information.html';
+      } else if (lang === 'zh') {
+        window.location.href = './zh/information.html';
+      }
+    }
+  </script>
 </body>
 </html>
